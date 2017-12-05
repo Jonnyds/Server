@@ -3,6 +3,6 @@ project(Server)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp Server.cpp)
+set(SOURCE_FILES main.cpp Server.cpp Server.h)
 
 add_executable(main ${SOURCE_FILES})
