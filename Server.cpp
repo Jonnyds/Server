@@ -33,29 +33,39 @@ void Server::start() {
 // Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
 // Define the client socket's structures
-    struct sockaddr_in clientAddress;
-    socklen_t clientAddressLen;
+    struct sockaddr_in clientAddress1;
+    socklen_t clientAddressLen1;
+    struct sockaddr_in clientAddress2;
+    socklen_t clientAddressLen2;
+
     while (true) {
         cout << "Waiting for client connections..." << endl;
 // Accept a new client connection
-        int clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
-        cout << "Client connected" << endl;
-        if (clientSocket == -1)
+        int clientSocket1 = accept(serverSocket, (struct sockaddr *)&clientAddress1, &clientAddressLen1);
+        cout << "Client 1 connected" << endl;
+        if (clientSocket1 == -1)
             throw "Error on accept";
-        handleClient(clientSocket);
+
+        int clientSocket2 = accept(serverSocket, (struct sockaddr *)&clientAddress2, &clientAddressLen2);
+        cout << "Client 2 connected" << endl;
+        if (clientSocket2 == -1)
+            throw "Error on accept";
+
+        handleClient(clientSocket1,clientSocket2);
 // Close communication with the client
-        close(clientSocket);
+        close(clientSocket1);
+        close(clientSocket2);
     }
 }
 
 
 // Handle requests from a specific client
-void Server::handleClient(int clientSocket) {
+void Server::handleClient(int clientSocket1, int clientSocket2) {
     int arg[2];
     char op;
     while (true) {
 // Read new exercise arguments
-        int n = read(clientSocket, &arg[0], sizeof (arg[0]));
+        int n = read(clientSocket1, &arg[0], sizeof (arg[0]));
         if (n == -1) {
             cout << "Error reading arg1" << endl;
             return;
@@ -69,7 +79,7 @@ void Server::handleClient(int clientSocket) {
              cout << "Error reading operator" << endl;
              return;
          }*/
-        n = read(clientSocket, &arg[1], sizeof(arg[1]));
+        n = read(clientSocket1, &arg[1], sizeof(arg[1]));
         if (n == -1) {
             cout << "Error reading arg2" << endl;
             return;
@@ -77,7 +87,7 @@ void Server::handleClient(int clientSocket) {
         /*  cout << "Got exercise: " << arg1 << op << arg2 << endl;
           int result = calc(arg1, op, arg2);*/
 // Write the result back to the client
-        n = write(clientSocket, &arg, sizeof(arg));
+        n = write(clientSocket1, &arg, sizeof(arg));
         if (n == -1) { cout << "Error writing to socket" << endl;
             return;
         }
