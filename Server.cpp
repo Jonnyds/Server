@@ -1,6 +1,9 @@
-//
-// Created by sahar on 03/12/17.
-//
+/*
+ * Name: Noam Itzhaki
+ * ID: 315773465
+ * Name: Jonathan Schwarz
+ * ID: 203672910
+ */
 
 #include "Server.h"
 #include <sys/socket.h>
@@ -8,12 +11,11 @@
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
-#include <stdio.h>
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 2
 
-Server::Server(int port) : port(port), serverSocket(0) { cout << "Noam is beautiful" << endl; }
+Server::Server(int port) : port(port), serverSocket(0) { cout << "Server connected" << endl; }
 
 void Server::start() {
 
@@ -45,7 +47,7 @@ void Server::start() {
     socklen_t clientAddressLen2;
 
     while (true) {
-        cout << "Waiting for client connections..." << endl;
+        cout << "Waiting for clients connections..." << endl;
 // Accept a new client connection
         int player1 = accept(serverSocket, (struct sockaddr *)&clientAddress1, &clientAddressLen1);
         cout << "Player 1 connected" << endl;
