@@ -13,7 +13,7 @@ class Server {
 public:
     Server(int port);
     void start();
-    
+
 private:
     bool handleClient(int clientSocket1, int clientSocket2) ;
     int port;
