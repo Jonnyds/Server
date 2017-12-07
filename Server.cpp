@@ -8,7 +8,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
-#include <stdio.h>
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 2
@@ -96,6 +95,10 @@ bool Server::handleClient(int clientSocket1, int clientSocket2) {
             cout << "Error reading arg2" << endl;
             return false;
         }
+
+    if((column == -6) && (row == -6)) {
+       return false;
+    }
 
 // Write the result back to the client
         n = write(clientSocket2, &row, sizeof(row));
