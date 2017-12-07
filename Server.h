@@ -1,6 +1,9 @@
-//
-// Created by sahar on 03/12/17.
-//
+/*
+ * Name: Noam Itzhaki
+ * ID: 315773465
+ * Name: Jonathan Schwarz
+ * ID: 203672910
+ */
 
 #ifndef SERVER_SERVER_H
 #define SERVER_SERVER_H

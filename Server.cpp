@@ -1,6 +1,9 @@
-//
-// Created by sahar on 03/12/17.
-//
+/*
+ * Name: Noam Itzhaki
+ * ID: 315773465
+ * Name: Jonathan Schwarz
+ * ID: 203672910
+ */
 
 #include "Server.h"
 #include <sys/socket.h>
@@ -8,7 +11,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
-#include <stdio.h>
+
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 2
@@ -16,6 +19,7 @@ using namespace std;
 Server::Server(int port) : port(port), serverSocket(0) { cout << "Noam is beautiful" << endl; }
 
 void Server::start() {
+
 int playernum = 0;
 // Create a socket point
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -83,7 +87,7 @@ bool Server::handleClient(int clientSocket1, int clientSocket2) {
 // Read new exercise arguments
         int n = read(clientSocket1, &row, sizeof (row));
         if (n == -1) {
-            cout << "Error reading arg1" << endl;
+            cout << "Error reading row coordinate" << endl;
             return false;
         }
         if (n == 0) {
@@ -93,7 +97,7 @@ bool Server::handleClient(int clientSocket1, int clientSocket2) {
 
         n = read(clientSocket1, &column, sizeof(column));
         if (n == -1) {
-            cout << "Error reading arg2" << endl;
+            cout << "Error reading column coordinate" << endl;
             return false;
         }
 
