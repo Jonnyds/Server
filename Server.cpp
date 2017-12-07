@@ -49,18 +49,25 @@ int playernum = 0;
         int player1 = accept(serverSocket, (struct sockaddr *)&clientAddress1, &clientAddressLen1);
         cout << "Player 1 connected" << endl;
         if (player1 == -1)
-            throw "Error on accept";
+            throw "Error on accept player1";
         playernum = 1;
         write(player1, &playernum, sizeof(playernum));
 
         int player2 = accept(serverSocket, (struct sockaddr *)&clientAddress2, &clientAddressLen2);
         cout << "Player 2 connected" << endl;
         if (player2 == -1)
-            throw "Error on accept";
+            throw "Error on accept player2";
         playernum = 2;
         write(player2, &playernum, sizeof(playernum));
 
-        handleClient(player1, player2);
+        while(true) {
+            if(!handleClient(player1, player2)){
+                break;
+            }
+            if(!handleClient(player2, player1)){
+                break;
+            }
+        }
 
 // Close communication with the client
         close(player1);
@@ -70,31 +77,36 @@ int playernum = 0;
 
 
 // Handle requests from a specific client
-void Server::handleClient(int clientSocket1, int clientSocket2) {
-    int arg[2];
-    char op;
-    while (true) {
+bool Server::handleClient(int clientSocket1, int clientSocket2) {
+    int column, row ;
+
 // Read new exercise arguments
-        int n = read(clientSocket1, &arg[0], sizeof (arg[0]));
+        int n = read(clientSocket1, &row, sizeof (row));
         if (n == -1) {
             cout << "Error reading arg1" << endl;
-            return;
+            return false;
         }
         if (n == 0) {
             cout << "Player disconnected" << endl;
-            return;
+            return false;
         }
 
-        n = read(clientSocket1, &arg[1], sizeof(arg[1]));
+        n = read(clientSocket1, &column, sizeof(column));
         if (n == -1) {
             cout << "Error reading arg2" << endl;
-            return;
+            return false;
         }
 
 // Write the result back to the client
-        n = write(clientSocket1, &arg, sizeof(arg));
-        if (n == -1) { cout << "Error writing to socket" << endl;
-            return;
+        n = write(clientSocket2, &row, sizeof(row));
+        if (n == -1) {
+            cout << "Error writing to socket" << endl;
+            return false;
         }
-    }
+        n = write(clientSocket2, &column, sizeof(column));
+        if (n == -1) {
+            cout << "Error writing to socket" << endl;
+            return false;
+        }
+        return true;
 }
