@@ -16,7 +16,8 @@ using namespace std;
 Server::Server(int port) : port(port), serverSocket(0) { cout << "Noam is beautiful" << endl; }
 
 void Server::start() {
-int playernum = 0;
+
+    int playernum = 0;
 // Create a socket point
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == -1) {
@@ -78,12 +79,13 @@ int playernum = 0;
 
 // Handle requests from a specific client
 bool Server::handleClient(int clientSocket1, int clientSocket2) {
+
     int column, row ;
 
 // Read new exercise arguments
         int n = read(clientSocket1, &row, sizeof (row));
         if (n == -1) {
-            cout << "Error reading arg1" << endl;
+            cout << "Error reading row coordinate" << endl;
             return false;
         }
         if (n == 0) {
@@ -93,7 +95,7 @@ bool Server::handleClient(int clientSocket1, int clientSocket2) {
 
         n = read(clientSocket1, &column, sizeof(column));
         if (n == -1) {
-            cout << "Error reading arg2" << endl;
+            cout << "Error reading column coordinate" << endl;
             return false;
         }
 
