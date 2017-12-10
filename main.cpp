@@ -15,7 +15,7 @@ int main() {
 
     int port;
     ifstream inFile;
-    inFile.open("/home/jonathan/CLionProjects/Reversi & tests/exe/settingServer.txt");
+    inFile.open("settingServer.txt");
     inFile >> port;
     Server server(port);
     try {
