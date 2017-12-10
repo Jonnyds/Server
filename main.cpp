@@ -17,6 +17,7 @@ int main() {
     ifstream inFile;
     inFile.open("settingServer.txt");
     inFile >> port;
+
     Server server(port);
     try {
         server.start();
