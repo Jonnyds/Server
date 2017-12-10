@@ -20,7 +20,8 @@ Server::Server(int port) : port(port), serverSocket(0) { cout << "Server connect
 void Server::start() {
 
     int playernum = 0;
-// Create a socket point
+
+    // Create a socket point
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == -1) {
         throw "Error opening socket";
@@ -36,10 +37,10 @@ void Server::start() {
         throw "Error on binding";
     }
 
-// Start listening to incoming connections
+    // Start listening to incoming connections
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
 
-// Define the client socket's structures
+    // Define the client socket's structures
     struct sockaddr_in clientAddress1;
     socklen_t clientAddressLen1;
 
@@ -48,18 +49,22 @@ void Server::start() {
 
     while (true) {
         cout << "Waiting for clients connections..." << endl;
-// Accept a new client connection
+
+    // Accept a new client connection
         int player1 = accept(serverSocket, (struct sockaddr *)&clientAddress1, &clientAddressLen1);
         cout << "Player 1 connected" << endl;
         if (player1 == -1)
             throw "Error on accept player1";
+
         playernum = 1;
         write(player1, &playernum, sizeof(playernum));
 
+        // Accept a new client connection
         int player2 = accept(serverSocket, (struct sockaddr *)&clientAddress2, &clientAddressLen2);
         cout << "Player 2 connected" << endl;
         if (player2 == -1)
             throw "Error on accept player2";
+
         playernum = 2;
         write(player2, &playernum, sizeof(playernum));
 
@@ -79,12 +84,12 @@ void Server::start() {
 }
 
 
-// Handle requests from a specific client
+    // Handle requests from a specific client
 bool Server::handleClient(int clientSocket1, int clientSocket2) {
 
     int column, row ;
 
-// Read new exercise arguments
+    // Read new coordinates arguments from the first client
         int n = read(clientSocket1, &row, sizeof (row));
         if (n == -1) {
             cout << "Error reading row coordinate" << endl;
@@ -101,7 +106,7 @@ bool Server::handleClient(int clientSocket1, int clientSocket2) {
             return false;
         }
 
-// Write the result back to the client
+    // Write the coordinates back to the second client
         n = write(clientSocket2, &row, sizeof(row));
         if (n == -1) {
             cout << "Error writing to socket" << endl;
