@@ -3,10 +3,12 @@
 //
 
 #include "CommandsManager.h"
+#include "PlayCommand.h"
+#include "CloseCommand.h"
 
 
 
-
+CommandsManager::CommandsManager() {}
 
 void CommandsManager:: executeCommand (string command, vector<string> args) {
 
