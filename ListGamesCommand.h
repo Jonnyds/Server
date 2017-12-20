@@ -8,6 +8,8 @@
 
 class ListGamesCommand: public Command {
 
+public:
+
     virtual void execute(vector<string> args) ;
 
 };

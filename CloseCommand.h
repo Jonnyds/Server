@@ -11,7 +11,7 @@
 class CloseCommand: public Command {
 
 public:
-    CloseCommand();
+
     virtual void execute(vector<string> args);
 
 };

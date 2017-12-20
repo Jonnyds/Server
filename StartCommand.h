@@ -8,6 +8,8 @@
 
 class StartCommand: public Command {
 
+public:
+
     virtual void execute(vector<string> args) ;
 
 };
