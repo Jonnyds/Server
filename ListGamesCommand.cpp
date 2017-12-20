@@ -6,7 +6,7 @@
 
 void ListGamesCommand::execute(vector<string> args) {
 
-    
+
 
 
 }

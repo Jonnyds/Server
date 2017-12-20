@@ -5,6 +5,9 @@
 #include "CommandsManager.h"
 #include "PlayCommand.h"
 #include "CloseCommand.h"
+#include "ListGamesCommand.h"
+#include "JoinCommand.h"
+#include "StartCommand.h"
 
 
 
