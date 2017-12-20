@@ -4,7 +4,7 @@
 
 #include "ListGamesCommand.h"
 
-void StartCommand::execute(vector<string> args) {
+void ListGamesCommand::execute(vector<string> args) {
 
 
 
