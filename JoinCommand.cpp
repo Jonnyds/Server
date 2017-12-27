@@ -4,7 +4,7 @@
 
 #include "JoinCommand.h"
 
-void JoinCommand::execute(vector<string> args) {
+void JoinCommand::execute(string args) {
 
 
 

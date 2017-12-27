@@ -12,7 +12,7 @@
 
 
 CommandsManager::CommandsManager() {
-    
+
     commandsMap["start"] = new StartCommand();
     commandsMap["list-games"] = new ListGamesCommand();
     commandsMap["join"] = new JoinCommand();
@@ -21,7 +21,7 @@ CommandsManager::CommandsManager() {
 
 }
 
-void CommandsManager:: executeCommand (string command, vector<string> args) {
+void CommandsManager:: executeCommand (string command, string args) {
 
     Command *commandObj = commandsMap[command];
     commandObj ->execute(args);

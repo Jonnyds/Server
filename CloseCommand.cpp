@@ -6,4 +6,4 @@
 
 
 
-void CloseCommand:: execute(vector<string> args) {}
+void CloseCommand:: execute(string args) {}

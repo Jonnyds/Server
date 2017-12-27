@@ -12,7 +12,7 @@ class CloseCommand: public Command {
 
 public:
 
-    virtual void execute(vector<string> args);
+    virtual void execute(string args);
 
 };
 

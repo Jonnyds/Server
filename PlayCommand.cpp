@@ -4,4 +4,4 @@
 
 #include "PlayCommand.h"
 
-void PlayCommand::execute(vector<string> args) {}
+void PlayCommand::execute(string args) {}
