@@ -18,6 +18,7 @@ CommandsManager::CommandsManager() {
     commandsMap["join"] = new JoinCommand();
     commandsMap["play"] = new PlayCommand();
     commandsMap["close"] = new CloseCommand();
+
 }
 
 void CommandsManager:: executeCommand (string command, vector<string> args) {
