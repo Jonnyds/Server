@@ -18,7 +18,7 @@ using namespace std;
 Server::Server(int port) : port(port), serverSocket(0) { cout << "Server connected" << endl; }
 
 void Server::start() {
-
+    pthread_t thread;
     int playernum = 0;
 
     // Create a socket point
@@ -42,51 +42,44 @@ void Server::start() {
 
     // Define the client socket's structures
     struct sockaddr_in clientAddress1;
-    socklen_t clientAddressLen1;
+    int rc = pthread_create(&thread, NULL, connect, (void *) &clientAddress1);
+    if (rc) {
+        cout << "Error: unable to create thread, " << rc << endl;
+        exit(-1);
+    }
 
-    struct sockaddr_in clientAddress2;
-    socklen_t clientAddressLen2;
+    }
 
-    while (true) {
-        cout << "Waiting for clients connections..." << endl;
 
-    // Accept a new client connection
-        int player1 = accept(serverSocket, (struct sockaddr *)&clientAddress1, &clientAddressLen1);
-        cout << "Player 1 connected" << endl;
-        if (player1 == -1)
-            throw "Error on accept player1";
 
-        playernum = 1;
-        write(player1, &playernum, sizeof(playernum));
+    // Handle requests from a specific client
+static void* Server::connect(void* clientSocket) {
+        while (true) {
+            pthread_t thread;
+            cout << "Waiting for clients connections..." << endl;
 
-        // Accept a new client connection
-        int player2 = accept(serverSocket, (struct sockaddr *)&clientAddress2, &clientAddressLen2);
-        cout << "Player 2 connected" << endl;
-        if (player2 == -1)
-            throw "Error on accept player2";
+            // Accept a new client connection
+            socklen_t clientAddressLen = sizeof((struct sockaddr *) &clientSocket);
+            int player1 = accept(serverSocket, (struct sockaddr *)&clientSocket, &clientAddressLen);
+            cout << "Player 1 connected" << endl;
+            if (player1 == -1)
+                throw "Error on accept player1";
 
-        playernum = 2;
-        write(player2, &playernum, sizeof(playernum));
-
-        while(true) {
-            if(!handleClient(player1, player2)){
-                break;
+            HandleClient handle(player1);
+            int rc = pthread_create(thread, NULL, makeOrder, NULL);
+            if (rc) {
+                cout << "Error: unable to create thread, " << rc << endl;
+                exit(-1);
             }
-            if(!handleClient(player2, player1)){
-                break;
-            }
+
         }
 
 // Close communication with the client
         close(player1);
-        close(player2);
     }
-}
 
 
-    // Handle requests from a specific client
-bool Server::handleClient(int clientSocket1, int clientSocket2) {
-
+/*(int clientSocket1, int clientSocket2)
     int column, row ;
 
     // Read new coordinates arguments from the first client
@@ -118,4 +111,6 @@ bool Server::handleClient(int clientSocket1, int clientSocket2) {
             return false;
         }
         return true;
+
 }
+ */

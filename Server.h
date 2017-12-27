@@ -25,12 +25,11 @@ private:
     /**
      * handle reading and writing to and from both clients
      * @param clientSocket1 the first client's socket.
-     * @param clientSocket2 the second client's socket.
      * @return
      */
-    bool handleClient(int clientSocket1, int clientSocket2);
+    static void* connect(void* clientSocket1);
     int port;
-    int serverSocket;
+    static int serverSocket;
 };
 
 #endif //SERVER_SERVER_H
