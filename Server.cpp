@@ -73,11 +73,11 @@ static void* Server::connect(void* clientSocket) {
                 cout << "Error: unable to create thread, " << rc << endl;
                 exit(-1);
             }
-
+// Close communication with the client
+            close(player1);
         }
 
-// Close communication with the client
-        close(player1);
+
     }
 
 
