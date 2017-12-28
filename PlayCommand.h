@@ -1,16 +1,18 @@
 //
 // Created by sahar on 12/20/17.
 //
-
+#include <iostream>
+using namespace std;
 #ifndef SERVER_PLAYCOMMAND_H
 #define SERVER_PLAYCOMMAND_H
 
 
-#include "Command.h"
 
-class PlayCommand: public Command {
 
-    virtual void execute(string args);
+class PlayCommand {
+public:
+PlayCommand(){}
+    bool execute(int socket1, int socket2);
 };
 
 

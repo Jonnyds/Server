@@ -16,7 +16,6 @@ CommandsManager::CommandsManager() {
     commandsMap["start"] = new StartCommand();
     commandsMap["list-games"] = new ListGamesCommand();
     commandsMap["join"] = new JoinCommand();
-    commandsMap["play"] = new PlayCommand();
     commandsMap["close"] = new CloseCommand();
 
 }
