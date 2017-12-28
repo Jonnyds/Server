@@ -20,7 +20,7 @@ class GameList {
         static GameList *getInstance();
         void addGame(struct listGames game);
         void removeGame(struct listGames game);
-        vector<GameList> getList() const;
+        vector<listGames> getList() const;
 
     private:
         GameList() {}; // Private c'tor

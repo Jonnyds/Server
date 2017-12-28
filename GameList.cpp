@@ -28,6 +28,6 @@ void GameList::removeGame(struct listGames game) {
     list.erase(std::remove(list.begin(), list.end(), game), list.end());
 }
 
-vector<GameList> GameList::getList() const {
-    return vector<GameList>();
+vector<listGames> GameList::getList() const {
+    return vector<listGames>();
 }
