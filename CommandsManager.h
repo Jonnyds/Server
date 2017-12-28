@@ -5,6 +5,7 @@
 #include <map>
 #include "Command.h"
 #include <iostream>
+#include "HandleClient.h"
 using namespace std;
 
 #ifndef SERVER_COMMANDSMANAGER_H
@@ -21,7 +22,7 @@ class CommandsManager {
 public:
     CommandsManager();
     ~CommandsManager();
-    void executeCommand(string command,string args);
+    void* executeCommand(void* threadArgs);
 private:
     map<string, Command *> commandsMap;
     vector<listGames> listGames;

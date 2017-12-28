@@ -14,7 +14,7 @@ using namespace std;
 class Command {
 
 public:
-    virtual void* execute(string args) = 0;
+    virtual void execute(string args) = 0;
     virtual ~Command() {}
 };
 

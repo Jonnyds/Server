@@ -33,9 +33,12 @@ static void HandleClient::makeOrder() {
 
     comSplit = strtok(com, space);
     doSplit = strtok(NULL, space);
+    ThreadArgs threadArgs;
+    threadArgs.name = comSplit;
+    threadArgs.order = doSplit;
 
     pthread_t thread;
-    int rc = pthread_create(&thread, NULL, command.executeCommand(comSplit, doSplit), (void *) doSplit);
+    int rc = pthread_create(&thread, NULL, command.executeCommand, (void *) &threadArgs);
     if (rc) {
         cout << "Error: unable to create thread, " << rc << endl;
         exit(-1);
