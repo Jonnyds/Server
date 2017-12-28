@@ -14,6 +14,7 @@ using namespace std;
 struct ThreadArgs {
     string name;
     string order;
+    int socket;
 };
 
 

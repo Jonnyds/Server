@@ -36,6 +36,7 @@ static void *HandleClient::makeOrder(void *targs) {
     ThreadArgs threadArgs;
     threadArgs.name = comSplit;
     threadArgs.order = doSplit;
+    threadArgs.socket = socket;
 
     pthread_t thread;
     int rc = pthread_create(&thread, NULL, command.executeCommand, (void *) &threadArgs);

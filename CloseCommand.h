@@ -12,7 +12,7 @@ class CloseCommand: public Command {
 
 public:
 
-    virtual void execute(string args);
+    virtual void execute(string args,int socket);
 
 };
 

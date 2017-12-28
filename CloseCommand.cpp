@@ -3,7 +3,9 @@
 //
 
 #include "CloseCommand.h"
+#include "GameList.h"
 
 
 
-void CloseCommand:: execute(string args) {}
+
+void CloseCommand:: execute(string args, int socket) {}

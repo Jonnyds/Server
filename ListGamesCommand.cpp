@@ -4,7 +4,7 @@
 
 #include "ListGamesCommand.h"
 
-void ListGamesCommand::execute(string args) {
+void ListGamesCommand::execute(string args, int socket) {
 
 
 
