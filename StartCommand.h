@@ -11,7 +11,7 @@ class StartCommand: public Command {
 public:
 
    // StartCommand(int socket);
-    virtual void execute(string args) ;
+    virtual void execute(string args, int socket) ;
 
 };
 

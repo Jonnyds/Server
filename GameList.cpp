@@ -18,7 +18,16 @@ GameList *GameList::getInstance()
     return instance;
 }
 
-void GameList::myMethod()
-{
-    cout << "Method of the Singleton class" << endl;
+void GameList::addGame(struct listGames game) {
+
+    list.push_back(game);
+}
+
+void GameList::removeGame(struct listGames game) {
+
+    list.erase(std::remove(list.begin(), list.end(), game), list.end());
+}
+
+vector<GameList> GameList::getList() const {
+    return vector<GameList>();
 }

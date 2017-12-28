@@ -7,8 +7,14 @@
 
 
 
-void StartCommand::execute(string args) {
+void StartCommand::execute(string args, int socket) {
 
     GameList* gameList = GameList::getInstance();
+    struct listGames game;
 
+    game.nameGame = args;
+    game.xSocket = socket;
+    game.oSocket = NULL;
+
+    gameList->addGame(game);
 }
