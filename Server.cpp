@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
+#include <complex>
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 2
@@ -66,8 +67,8 @@ static void* Server::connect(void* clientSocket) {
             if (player1 == -1)
                 throw "Error on accept player1";
 
-            HandleClient handle(player1);
-            int rc = pthread_create(&thread, NULL, handle.makeOrder(), NULL);
+            HandleClient handle = HandleClient(player1);
+            int rc = pthread_create(&thread, NULL, handle.makeOrder, NULL);
             if (rc) {
                 cout << "Error: unable to create thread, " << rc << endl;
                 exit(-1);

@@ -14,7 +14,7 @@
 HandleClient::HandleClient(int &socket): socket(socket) {}
 
 
-static void* HandleClient::makeOrder() {
+static void *HandleClient::makeOrder(void *targs) {
 
     char* com;
     char* comSplit;
