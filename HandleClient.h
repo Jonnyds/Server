@@ -20,7 +20,7 @@ struct ThreadArgs {
 class HandleClient {
 public:
     HandleClient(int &socket);
-    static void makeOrder();
+    static void* makeOrder();
 
 private:
     static int socket;

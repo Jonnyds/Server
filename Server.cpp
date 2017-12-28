@@ -6,6 +6,7 @@
  */
 
 #include "Server.h"
+#include "HandleClient.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
@@ -66,7 +67,7 @@ static void* Server::connect(void* clientSocket) {
                 throw "Error on accept player1";
 
             HandleClient handle(player1);
-            int rc = pthread_create(thread, NULL, makeOrder, NULL);
+            int rc = pthread_create(&thread, NULL, handle.makeOrder(), NULL);
             if (rc) {
                 cout << "Error: unable to create thread, " << rc << endl;
                 exit(-1);
