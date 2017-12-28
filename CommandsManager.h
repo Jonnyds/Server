@@ -11,11 +11,6 @@ using namespace std;
 #ifndef SERVER_COMMANDSMANAGER_H
 #define SERVER_COMMANDSMANAGER_H
 
-struct listGames {
-    int xSocket;
-    int oSocket;
-    string nameGame;
-};
 
 class CommandsManager {
 
@@ -25,7 +20,6 @@ public:
     void* executeCommand(void* threadArgs);
 private:
     map<string, Command *> commandsMap;
-    vector<listGames> listGames;
 };
 
 #endif //SERVER_COMMANDSMANAGER_H
