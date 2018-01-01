@@ -8,6 +8,16 @@
 #ifndef SERVER_SERVER_H
 #define SERVER_SERVER_H
 
+#include <sys/param.h>
+#include <vector>
+
+using  namespace std;
+
+struct TheThreads {
+    vector<pthread_t> clients;
+    vector<pthread_t> commands;
+};
+
 class Server {
 
 public:
@@ -20,6 +30,7 @@ public:
      * setup the server (connections)
      */
     void start();
+    void exitSockets(TheThreads &threads);
 
 private:
     /**
@@ -27,7 +38,7 @@ private:
      * @param clientSocket1 the first client's socket.
      * @return
      */
-    static void* connect(void* clientSocket1);
+    static void* connect(void* threads);
     int port;
     static int serverSocket;
 };
