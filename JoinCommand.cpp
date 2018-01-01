@@ -13,7 +13,8 @@ void JoinCommand::execute(string args, int socket) {
         if (gl->getList()[i].nameGame == args) {
             gl->getList()[i].oSocket = socket;
             flag = true;
-            GameManager gm();
+            GameManager gm(gl->getList()[i]);
+            gm.play();
         }
     }
     if(!flag) {

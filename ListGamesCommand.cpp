@@ -11,11 +11,11 @@ void ListGamesCommand::execute(string args, int socket) {
 
     GameList* gl = GameList::getInstance();
     vector<listGames> vgl = gl->getList();
-    vector<listGames> newvgl;
+    vector<string> newvgl;
 
     for (int i = 0; i <vgl.size() ; ++i) {
         if(vgl[i].oSocket == NULL) {
-            newvgl.push_back(vgl[i]);
+            newvgl.push_back(vgl[i].nameGame);
         }
     }
 
