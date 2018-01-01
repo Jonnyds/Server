@@ -102,7 +102,7 @@ void Server::exitSockets(TheThreads &threads) {
     while (cmd != "exit") {
         cin >> cmd;
     }
-    
+
     for (int i = 0; i < threads.commands.size(); ++i) {
        pthread_cancel(threads.commands[i]);
     }
