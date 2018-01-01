@@ -61,12 +61,14 @@ static void* Server::connect(void* clientSocket) {
             cout << "Waiting for clients connections..." << endl;
 
             // Accept a new client connection
+            pthread_mutex_t listen_mutex;
+            pthread_mutex_lock(&listen_mutex);
             socklen_t clientAddressLen = sizeof((struct sockaddr *) &clientSocket);
             int player1 = accept(serverSocket, (struct sockaddr *)&clientSocket, &clientAddressLen);
             cout << "Player 1 connected" << endl;
             if (player1 == -1)
                 throw "Error on accept player1";
-
+            pthread_mutex_unlock(&listen_mutex);
             HandleClient handle = HandleClient(player1);
             int rc = pthread_create(&thread, NULL, handle.makeOrder, NULL);
             if (rc) {

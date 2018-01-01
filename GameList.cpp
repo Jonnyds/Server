@@ -19,13 +19,17 @@ GameList *GameList::getInstance()
 }
 
 void GameList::addGame(struct listGames game) {
-
+    pthread_mutex_t list_mutex;
+    pthread_mutex_lock(&list_mutex);
     list.push_back(game);
+    pthread_mutex_unlock(&list_mutex);
 }
 
 void GameList::removeGame(struct listGames game) {
-
+    pthread_mutex_t list_mutex;
+    pthread_mutex_lock(&list_mutex);
     list.erase(std::remove(list.begin(), list.end(), game), list.end());
+    pthread_mutex_unlock(&list_mutex);
 }
 
 vector<listGames> GameList::getList() const {

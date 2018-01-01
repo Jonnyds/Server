@@ -20,9 +20,12 @@ void ListGamesCommand::execute(string args, int socket) {
     }
 
     int n;
+    pthread_mutex_t list_mutex;
+    pthread_mutex_lock(&list_mutex);
     n = write(socket,&newvgl,sizeof(newvgl));
     if (n == -1) {
         cout << "Error writing to socket" << endl;
         exit(-1);
     }
+    pthread_mutex_unlock(&list_mutex);
 }
