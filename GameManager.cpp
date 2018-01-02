@@ -2,6 +2,7 @@
 // Created by jonathan on 27/12/17.
 //
 
+#include <unistd.h>
 #include "GameManager.h"
 #include "PlayCommand.h"
 #include "CommandsManager.h"
@@ -17,6 +18,16 @@ GameManager::GameManager(listGames &lg) {
 
 void GameManager::play() {
 
+    int n, x = 1, o = 2;
+    n = write(playing.xSocket, &x, sizeof(x));
+    if (n == -1) {
+        cout << "Error writing to socket" << endl;
+    }
+
+    n = write(playing.xSocket, &o, sizeof(o));
+    if (n == -1) {
+        cout << "Error writing to socket" << endl;
+    }
     PlayCommand pc;
     while(true) {
         if(!pc.execute(playing.xSocket, playing.oSocket)){

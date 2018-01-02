@@ -73,9 +73,9 @@ static void* Server::connect(void* threads) {
 
             socklen_t clientAddressLen = sizeof((struct sockaddr *) &clientAddress1);
             int player1 = accept(serverSocket, (struct sockaddr *)&clientAddress1, &clientAddressLen);
-            cout << "Player 1 connected" << endl;
+            cout << "Player connected" << endl;
             if (player1 == -1)
-                throw "Error on accept player1";
+                throw "Error on accept player";
             pthread_mutex_unlock(&listen_mutex);
 
             HandleClient handle = HandleClient(player1);
