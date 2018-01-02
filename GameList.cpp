@@ -42,4 +42,8 @@ vector<listGames> GameList::getList() const {
     return list;
 }
 
+void GameList::setOsocket(int socket, int index) {
+    list[index].oSocket = socket;
+}
+
 

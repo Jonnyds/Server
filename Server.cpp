@@ -67,6 +67,8 @@ void Server::start() {
         struct TheThreads *args = (struct TheThreads *) threads;
 
         struct sockaddr_in clientAddress1;
+        socklen_t clientAddressLen = sizeof((struct sockaddr *) &clientAddress1);
+
 
         while (true) {
 
@@ -80,17 +82,17 @@ void Server::start() {
 
 
 
-            socklen_t clientAddressLen = sizeof((struct sockaddr *) &clientAddress1);
+
             int player = accept(args->Socket, (struct sockaddr *)&clientAddress1, &clientAddressLen);
             cout << "Player connected" << endl;
             if (player == -1)
                 throw "Error on accept player";
            // pthread_mutex_unlock(&listen_mutex);
 
-            HandleClient handle = HandleClient(player);
+         //   HandleClient handle = HandleClient(player);
             pthread_t thread;
             args->clients.push_back(thread);
-            int rc = pthread_create(&thread, NULL, handle.makeOrder, (void *) &player);
+            int rc = pthread_create(&thread, NULL, HandleClient::makeOrder, (void *) &player);
             if (rc) {
                 cout << "Error: unable to create thread, " << rc << endl;
                 exit(-1);

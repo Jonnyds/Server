@@ -21,6 +21,7 @@ class GameList {
         void addGame(struct listGames game);
         void removeGame(struct listGames game);
         vector<listGames> getList() const;
+        void setOsocket(int socket, int index);
 
     private:
         GameList() {}; // Private c'tor
