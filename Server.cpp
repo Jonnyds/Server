@@ -18,11 +18,13 @@
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
 
-Server::Server(int port) : port(port), serverSocket(0) { cout << "Server connected" << endl; }
+Server::Server(int port) : port(port) {
+    serverSocket = 0;
+    cout << "Server connected" << endl;
+}
 
 void Server::start() {
     pthread_t thread;
-    int playernum = 0;
 
     // Create a socket point
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
