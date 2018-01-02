@@ -39,7 +39,7 @@ void GameList::removeGame(struct listGames game) {
 }
 
 vector<listGames> GameList::getList() const {
-    return vector<listGames>();
+    return list;
 }
 
 

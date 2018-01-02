@@ -24,10 +24,11 @@ void GameManager::play() {
         cout << "Error writing to socket" << endl;
     }
 
-    n = write(playing.xSocket, &o, sizeof(o));
+    n = write(playing.oSocket, &o, sizeof(o));
     if (n == -1) {
         cout << "Error writing to socket" << endl;
     }
+
     PlayCommand pc;
     while(true) {
         if(!pc.execute(playing.xSocket, playing.oSocket)){

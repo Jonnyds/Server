@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
+#include <sstream>
 
 
 HandleClient::HandleClient(int &socket1) {
@@ -18,16 +19,15 @@ HandleClient::HandleClient(int &socket1) {
 }
 
 void *HandleClient::makeOrder(void *socket) {
-
-    char* com;
-    char* comSplit;
-    char* doSplit;
-    char* space = (char*) ' ';
-
+    string comSplit;
+    string scmd;
+    char cmd[50];
     CommandsManager command = CommandsManager();
 
     while ((comSplit != "start") || (comSplit != "join")) {
-        int n = read(*(int *)socket, &com, sizeof(com));
+
+
+        int n = read(*(int *)socket, &cmd, sizeof(cmd));
 
         if (n == -1) {
             cout << "Error reading command" << endl;
@@ -37,11 +37,19 @@ void *HandleClient::makeOrder(void *socket) {
             cout << "Player disconnected" << endl;
         }
 
-        comSplit = strtok(com, space);
-        doSplit = strtok(NULL, space);
+        for (int i = 0; i < strlen(cmd); ++i) {
+            scmd.append(1u ,cmd[i]);
+        }
+        string str(scmd);
+        istringstream iss(str);
+
+        iss >> comSplit;
+        string doSplit;
+        iss >> doSplit;
         ThreadArgs threadArgs;
-        threadArgs.name = comSplit;
-        threadArgs.order = doSplit;
+        threadArgs.name = doSplit;
+
+        threadArgs.order = comSplit;
         threadArgs.socket = *(int *)socket;
 
         command.executeCommand(threadArgs);

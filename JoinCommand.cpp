@@ -8,8 +8,9 @@
 
 void JoinCommand::execute(string args, int socket) {
     GameList* gl = GameList::getInstance();
+    int i = 0;
     bool flag = false;
-    for (int i = 0; i <gl->getList().size() ; ++i) {
+    for (i = 0; i < gl->getList().size() ; i++) {
         if (gl->getList()[i].nameGame == args) {
             gl->getList()[i].oSocket = socket;
             flag = true;

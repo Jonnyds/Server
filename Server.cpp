@@ -26,7 +26,7 @@ Server::Server(int port) : port(port), serverSocket(0) {
 }
 
 void Server::start() {
-    pthread_t thread;
+
 
     // Create a socket point
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -48,6 +48,7 @@ void Server::start() {
     listen(serverSocket, MAX_CONNECTED_CLIENTS);
 
     TheThreads threads;
+    threads.Socket = serverSocket;
     threads.clients.push_back(thread);
 
     int rc = pthread_create(&thread, NULL, connect, (void *) &threads);
@@ -65,15 +66,17 @@ void Server::start() {
  void* Server::connect(void* threads) {
         struct TheThreads *args = (struct TheThreads *) threads;
 
+        struct sockaddr_in clientAddress1;
+
         while (true) {
 
             cout << "Waiting for clients connections..." << endl;
 
             // Accept a new client connection
-            struct sockaddr_in clientAddress1;
 
-            pthread_mutex_t listen_mutex;
-            pthread_mutex_lock(&listen_mutex);
+
+            //pthread_mutex_t listen_mutex;
+            //pthread_mutex_lock(&listen_mutex);
 
 
 
@@ -82,7 +85,7 @@ void Server::start() {
             cout << "Player connected" << endl;
             if (player == -1)
                 throw "Error on accept player";
-            pthread_mutex_unlock(&listen_mutex);
+           // pthread_mutex_unlock(&listen_mutex);
 
             HandleClient handle = HandleClient(player);
             pthread_t thread;
@@ -93,7 +96,6 @@ void Server::start() {
                 exit(-1);
             }
 // Close communication with the client
-            close(player);
         }
 
 

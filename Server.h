@@ -41,6 +41,7 @@ private:
     static void* connect(void* threads);
     int port;
     int serverSocket;
+    pthread_t thread;
 };
 
 #endif //SERVER_SERVER_H
