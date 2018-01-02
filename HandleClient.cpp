@@ -14,8 +14,7 @@
 
 HandleClient::HandleClient(int &socket): socket(socket) {}
 
-
-static void *HandleClient::makeOrder(void *targs) {
+void *HandleClient::makeOrder(void *targs) {
     struct TheThreads *args = (struct TheThreads *) targs;
     char* com;
     char* comSplit;

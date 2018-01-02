@@ -18,6 +18,7 @@
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
 
+
 Server::Server(int port) : port(port) {
     serverSocket = 0;
     cout << "Server connected" << endl;
@@ -60,7 +61,7 @@ void Server::start() {
 
 
     // Handle requests from a specific client
-static void* Server::connect(void* threads) {
+ void* Server::connect(void* threads) {
         struct TheThreads *args = (struct TheThreads *) threads;
 
         while (true) {
