@@ -17,9 +17,9 @@ class CommandsManager {
 public:
     CommandsManager();
     ~CommandsManager();
-    void* executeCommand(void* threadArgs);
+    static void* executeCommand(void* threadArgs);
 private:
-    map<string, Command *> commandsMap;
+    static map<string, Command *> commandsMap;
 };
 
 #endif //SERVER_COMMANDSMANAGER_H
