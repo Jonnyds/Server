@@ -17,8 +17,8 @@ HandleClient::HandleClient(int &socket1) {
     socket = socket1;
 }
 
-void *HandleClient::makeOrder(void* targs) {
-    struct TheThreads *args = (struct TheThreads *) targs;
+void *HandleClient::makeOrder(void *socket) {
+
     char* com;
     char* comSplit;
     char* doSplit;
@@ -27,7 +27,7 @@ void *HandleClient::makeOrder(void* targs) {
     CommandsManager command = CommandsManager();
 
     while ((comSplit != "start") || (comSplit != "join")) {
-        int n = read(socket, &com, sizeof(com));
+        int n = read(*(int *)socket, &com, sizeof(com));
 
         if (n == -1) {
             cout << "Error reading command" << endl;
@@ -42,15 +42,9 @@ void *HandleClient::makeOrder(void* targs) {
         ThreadArgs threadArgs;
         threadArgs.name = comSplit;
         threadArgs.order = doSplit;
-        threadArgs.socket = socket;
+        threadArgs.socket = *(int *)socket;
 
-        pthread_t thread;
-        args->commands.push_back(thread);
-        int rc = pthread_create(&thread, NULL, command.executeCommand, (void *) &threadArgs);
-        if (rc) {
-            cout << "Error: unable to create thread, " << rc << endl;
-            exit(-1);
-        }
+        command.executeCommand(threadArgs);
     }
     //pthread_exit(NULL);
 }

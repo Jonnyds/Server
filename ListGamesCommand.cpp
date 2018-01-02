@@ -6,6 +6,7 @@
 #include "GameList.h"
 #include <vector>
 #include <unistd.h>
+#include <cstdlib>
 
 void ListGamesCommand::execute(string args, int socket) {
 

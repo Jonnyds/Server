@@ -13,14 +13,15 @@
 #include <string.h>
 #include <iostream>
 #include <complex>
+#include <cstdlib>
 #include "GameList.h"
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
 
 
-Server::Server(int port) : port(port) {
-    serverSocket = 0;
+Server::Server(int port) : port(port), serverSocket(0) {
+    //Server::serverSocket = 0;
     cout << "Server connected" << endl;
 }
 
@@ -74,23 +75,25 @@ void Server::start() {
             pthread_mutex_t listen_mutex;
             pthread_mutex_lock(&listen_mutex);
 
+
+
             socklen_t clientAddressLen = sizeof((struct sockaddr *) &clientAddress1);
-            int player1 = accept(serverSocket, (struct sockaddr *)&clientAddress1, &clientAddressLen);
+            int player = accept(args->Socket, (struct sockaddr *)&clientAddress1, &clientAddressLen);
             cout << "Player connected" << endl;
-            if (player1 == -1)
+            if (player == -1)
                 throw "Error on accept player";
             pthread_mutex_unlock(&listen_mutex);
 
-            HandleClient handle = HandleClient(player1);
+            HandleClient handle = HandleClient(player);
             pthread_t thread;
             args->clients.push_back(thread);
-            int rc = pthread_create(&thread, NULL, handle.makeOrder, (void *) &args);
+            int rc = pthread_create(&thread, NULL, handle.makeOrder, (void *) &player);
             if (rc) {
                 cout << "Error: unable to create thread, " << rc << endl;
                 exit(-1);
             }
 // Close communication with the client
-            close(player1);
+            close(player);
         }
 
 
@@ -106,9 +109,6 @@ void Server::exitSockets(TheThreads &threads) {
         cin >> cmd;
     }
 
-    for (int i = 0; i < threads.commands.size(); ++i) {
-       pthread_cancel(threads.commands[i]);
-    }
 
     GameList* gl = GameList::getInstance();
 

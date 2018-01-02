@@ -15,7 +15,7 @@ using  namespace std;
 
 struct TheThreads {
     vector<pthread_t> clients;
-    vector<pthread_t> commands;
+    int Socket;
 };
 
 class Server {
@@ -25,7 +25,7 @@ public:
      * Server constructor.
      * @param port - the port number.
      */
-    Server(int port);
+    explicit Server(int port);
     /**
      * setup the server (connections)
      */
@@ -40,7 +40,7 @@ private:
      */
     static void* connect(void* threads);
     int port;
-    static int serverSocket;
+    int serverSocket;
 };
 
 #endif //SERVER_SERVER_H

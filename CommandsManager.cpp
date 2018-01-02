@@ -20,12 +20,10 @@ CommandsManager::CommandsManager() {
 
 }
 
-void* CommandsManager:: executeCommand (void* threadArgs) {
+void CommandsManager:: executeCommand (ThreadArgs threadArgs) {
 
-    struct ThreadArgs *args = (struct ThreadArgs *) threadArgs;
-
-    Command *commandObj = commandsMap[args->order];
-    commandObj ->execute(args->name, args->socket);
+    Command *commandObj = commandsMap[threadArgs.order];
+    commandObj ->execute(threadArgs.name, threadArgs.socket);
 }
 
 CommandsManager:: ~CommandsManager() {

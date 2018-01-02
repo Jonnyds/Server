@@ -42,7 +42,7 @@ void GameManager::play() {
     args.name = playing.nameGame;
     args.socket = playing.xSocket;
     args.order = "close";
-    cm.executeCommand(&args);
+    cm.executeCommand(args);
 
 }
 
