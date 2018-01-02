@@ -28,7 +28,13 @@ void GameList::addGame(struct listGames game) {
 void GameList::removeGame(struct listGames game) {
     pthread_mutex_t list_mutex;
     pthread_mutex_lock(&list_mutex);
-    list.erase(std::remove(list.begin(), list.end(), game), list.end());
+    for (int i = 0; i < list.size(); ++i) {
+        if ((list[i].xSocket == game.xSocket) && (list[i].oSocket == game.oSocket)
+            && (list[i].nameGame == game.nameGame)) {
+            list.erase(list.begin() + i);
+        }
+
+    }
     pthread_mutex_unlock(&list_mutex);
 }
 
