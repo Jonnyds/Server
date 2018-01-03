@@ -118,7 +118,7 @@ void Server::exitSockets(TheThreads &threads) {
 
     for (int i = 0; i < gl->getList().size(); ++i) {
         close(gl->getList()[i].xSocket);
-        if(gl->getList()[i].oSocket != NULL) {
+        if(gl->getList()[i].oSocket != -5) {
             close(gl->getList()[i].oSocket);
         }
     }

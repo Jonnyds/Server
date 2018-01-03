@@ -21,7 +21,7 @@ void ListGamesCommand::execute(string args, int socket) {
         exit(-1);
     }
     for (int j = 0; j < vgl.size() ; ++j) {
-        if(vgl[j].oSocket == NULL) {
+        if(vgl[j].oSocket == -5) {
             strcpy(name,vgl[j].nameGame.c_str());
             n = write(socket,name, strlen(name));
             if (n == -1) {
