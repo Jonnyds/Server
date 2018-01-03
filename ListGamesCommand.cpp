@@ -20,7 +20,7 @@ void ListGamesCommand::execute(string args, int socket) {
     }
     for (int i = 0; i <vgl.size() ; ++i) {
         if(vgl[i].oSocket == NULL) {
-            n = write(socket,&vgl[i].nameGame.c_str(),sizeof(vgl));
+            n = write(socket,vgl[i].nameGame.c_str(),vgl[i].nameGame.length());
             if (n == -1) {
                 cout << "Error writing to socket" << endl;
                 exit(-1);
