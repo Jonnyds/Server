@@ -47,6 +47,7 @@ void *HandleClient::makeOrder(void *socket) {
         for (int i = 0; i < strlen(cmd); ++i) {
             scmd.append(1u ,cmd[i]);
         }
+
         string str(scmd);
         istringstream iss(str);
 
@@ -60,6 +61,7 @@ void *HandleClient::makeOrder(void *socket) {
         threadArgs.socket = *(int*)socket;
 
         command.executeCommand(threadArgs);
+        scmd.clear();
         memset(cmd, 0, sizeof(cmd));
     }
 }
