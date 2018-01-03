@@ -56,12 +56,11 @@ void *HandleClient::makeOrder(void *socket) {
         iss >> doSplit;
         ThreadArgs threadArgs;
         threadArgs.name = doSplit;
-
         threadArgs.order = comSplit;
         threadArgs.socket = *(int*)socket;
 
         command.executeCommand(threadArgs);
+        memset(cmd, 0, 50);
         scmd.clear();
-        memset(cmd, 0, sizeof(cmd));
     }
 }
