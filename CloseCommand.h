@@ -1,6 +1,9 @@
-//
-// Created by sahar on 12/20/17.
-//
+/*
+ * Name: Noam Itzhaki
+ * ID: 315773465
+ * Name: Jonathan Schwarz
+ * ID: 203672910
+ */
 
 #ifndef SERVER_CLOSECOMMAND_H
 #define SERVER_CLOSECOMMAND_H

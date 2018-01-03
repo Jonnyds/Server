@@ -1,6 +1,10 @@
-//
-// Created by jonathan on 20/12/17.
-//
+/*
+ * Name: Noam Itzhaki
+ * ID: 315773465
+ * Name: Jonathan Schwarz
+ * ID: 203672910
+ */
+
 #include "Command.h"
 #ifndef SERVER_STARTCOMMAND_H
 #define SERVER_STARTCOMMAND_H

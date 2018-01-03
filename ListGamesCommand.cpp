@@ -1,6 +1,9 @@
-//
-// Created by jonathan on 20/12/17.
-//
+/*
+ * Name: Noam Itzhaki
+ * ID: 315773465
+ * Name: Jonathan Schwarz
+ * ID: 203672910
+ */
 
 #include "ListGamesCommand.h"
 #include "GameList.h"

@@ -116,16 +116,24 @@ void Server::exitSockets(TheThreads &threads) {
 
     GameList* gl = GameList::getInstance();
 
+    int closesocket = -4;
+
     for (int i = 0; i < gl->getList().size(); ++i) {
+        n = write(gl->getList()[i].xSocket,&closesocket, sizeof(closesocket));
+        n = write(gl->getList()[i].xSocket,&closesocket, sizeof(closesocket));
         close(gl->getList()[i].xSocket);
         if(gl->getList()[i].oSocket != -5) {
+            n = write(gl->getList()[i].oSocket,&closesocket, sizeof(closesocket));
+            n = write(gl->getList()[i].oSocket,&closesocket, sizeof(closesocket));
             close(gl->getList()[i].oSocket);
         }
     }
 
-    for (int j = 0; j < threads.clients.size(); ++j) {
+    for (int j = 1; j < threads.clients.size(); ++j) {
         pthread_cancel(threads.clients[j]);
     }
+
+    cout << "SERVER IS CLOSED"<< endl;
 }
 
 

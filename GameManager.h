@@ -1,6 +1,10 @@
-//
-// Created by jonathan on 27/12/17.
-//
+/*
+ * Name: Noam Itzhaki
+ * ID: 315773465
+ * Name: Jonathan Schwarz
+ * ID: 203672910
+ */
+
 #include "GameList.h"
 #ifndef SERVER_GAMEMANAGER_H
 #define SERVER_GAMEMANAGER_H

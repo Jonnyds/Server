@@ -26,7 +26,7 @@ void StartCommand::execute(string args, int socket) {
 
     game.nameGame = args;
     game.xSocket = socket;
-    game.oSocket = NULL;
+    game.oSocket = -5;
 
     gameList->addGame(game);
 }
