@@ -22,12 +22,19 @@ void *HandleClient::makeOrder(void *socket) {
     string comSplit;
     string scmd;
     char cmd[50];
+    int s = *(int *) socket;
     CommandsManager command = CommandsManager();
 
-    while ((comSplit != "start") || (comSplit != "join")) {
+    while (true) {
 
+        if (comSplit.compare("join") == 0) {
+            break;
+        }
+        if (comSplit.compare("start") == 0){
+            break;
+        }
 
-        int n = read(*(int *)socket, &cmd, sizeof(cmd));
+        int n = read(s, &cmd, sizeof(cmd));
 
         if (n == -1) {
             cout << "Error reading command" << endl;
@@ -50,9 +57,9 @@ void *HandleClient::makeOrder(void *socket) {
         threadArgs.name = doSplit;
 
         threadArgs.order = comSplit;
-        threadArgs.socket = *(int *)socket;
+        threadArgs.socket = *(int*)socket;
 
         command.executeCommand(threadArgs);
+        memset(cmd, 0, sizeof(cmd));
     }
-    //pthread_exit(NULL);
 }

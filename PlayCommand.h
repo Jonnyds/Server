@@ -8,10 +8,22 @@ using namespace std;
 
 
 
-
+/**
+ * This class hold a function that reads from one player's socket to the second player's
+ * socket.
+ */
 class PlayCommand {
 public:
+    /**
+     * constructor.
+     */
 PlayCommand(){}
+    /**
+     * Executes the read and write of the coordinates from one socket to the other.
+     * @param socket1 - the first socket the coordinates are read from.
+     * @param socket2 - the second socket the coordinates are write to.
+     * @return if the the game is not over false otherwise true.
+     */
     bool execute(int socket1, int socket2);
 };
 

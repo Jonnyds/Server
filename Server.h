@@ -30,18 +30,18 @@ public:
      * setup the server (connections)
      */
     void start();
+
     void exitSockets(TheThreads &threads);
 
 private:
     /**
-     * handle reading and writing to and from both clients
-     * @param clientSocket1 the first client's socket.
-     * @return
+     * Handles the connecting of new client to the server (operates in a thread).
+     * @param clientSocket1 the client's socket.
      */
     static void* connect(void* threads);
-    int port;
-    int serverSocket;
-    pthread_t thread;
+    int port; // the server's port.
+    int serverSocket; // the server's socket.
+    pthread_t thread; // the connect function's thread.
 };
 
 #endif //SERVER_SERVER_H

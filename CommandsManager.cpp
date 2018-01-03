@@ -20,7 +20,7 @@ CommandsManager::CommandsManager() {
 
 }
 
-void CommandsManager:: executeCommand (ThreadArgs threadArgs) {
+void CommandsManager:: executeCommand (ThreadArgs &threadArgs) {
 
     Command *commandObj = commandsMap[threadArgs.order];
     commandObj ->execute(threadArgs.name, threadArgs.socket);

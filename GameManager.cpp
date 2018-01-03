@@ -38,6 +38,7 @@ void GameManager::play() {
             break;
         }
     }
+
     CommandsManager cm;
     ThreadArgs args;
     args.name = playing.nameGame;
