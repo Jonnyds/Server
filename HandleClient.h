@@ -10,6 +10,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+const int length = 50;
 /**
  * Struct with the details of a single client.
  */

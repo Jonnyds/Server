@@ -21,7 +21,7 @@ HandleClient::HandleClient(int &socket1) {
 void *HandleClient::makeOrder(void *socket) {
     string comSplit;
     string scmd;
-    char cmd[50];
+    char cmd[length];
     int s = *(int *) socket;
     CommandsManager command = CommandsManager();
 
@@ -60,7 +60,7 @@ void *HandleClient::makeOrder(void *socket) {
         threadArgs.socket = *(int*)socket;
 
         command.executeCommand(threadArgs);
-        memset(cmd, 0, 50);
+        memset(cmd, 0, length);
         scmd.clear();
     }
 }
