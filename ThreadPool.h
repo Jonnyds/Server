@@ -1,6 +1,9 @@
-//
-// Created by jonathan on 23/01/18.
-//
+/*
+ * Name: Noam Itzhaki
+ * ID: 315773465
+ * Name: Jonathan Schwarz
+ * ID: 203672910
+ */
 
 #include <queue>
 #include <pthread.h>

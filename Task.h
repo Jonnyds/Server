@@ -1,6 +1,9 @@
-//
-// Created by jonathan on 23/01/18.
-//
+/*
+ * Name: Noam Itzhaki
+ * ID: 315773465
+ * Name: Jonathan Schwarz
+ * ID: 203672910
+ */
 
 class Task {
 public:
@@ -15,5 +18,3 @@ private:
     void *arg;
 };
 
-
-#endif //SERVER_TASK_H
