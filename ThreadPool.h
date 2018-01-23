@@ -1,6 +1,7 @@
 //
 // Created by jonathan on 23/01/18.
 //
+/*
 #include <queue>
 #include <pthread.h>
 using namespace std;
@@ -17,5 +18,5 @@ private:
     bool stopped;
     pthread_mutex_t lock;
     static void *execute(void *arg);
-};
+};*/
 

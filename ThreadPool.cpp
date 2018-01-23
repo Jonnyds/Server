@@ -1,6 +1,7 @@
 //
 // Created by jonathan on 23/01/18.
 //
+/*
 #include "ThreadPool.h"
 #include <unistd.h>
 ThreadPool::ThreadPool(int threadsNum) :
@@ -40,4 +41,4 @@ void ThreadPool::terminate() {
 }
 ThreadPool::~ThreadPool() {
     delete[] threads;
-}
+}*/
