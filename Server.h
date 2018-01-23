@@ -8,6 +8,8 @@
 #ifndef SERVER_SERVER_H
 #define SERVER_SERVER_H
 
+#include "Server.h"
+#include "ThreadPool.h"
 #include <sys/param.h>
 #include <vector>
 
@@ -16,6 +18,7 @@ using  namespace std;
 struct TheThreads {
     vector<pthread_t> clients;
     int Socket;
+    Server *s;
 };
 
 class Server {
@@ -32,6 +35,7 @@ public:
     void start();
 
     void exitSockets(TheThreads &threads);
+    ThreadPool getThreads();
 
 private:
     /**
@@ -42,6 +46,7 @@ private:
     int port; // the server's port.
     int serverSocket; // the server's socket.
     pthread_t thread; // the connect function's thread.
+    ThreadPool pooly;
 };
 
 #endif //SERVER_SERVER_H

@@ -18,9 +18,9 @@
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
+#define THREADS_NUM 3
 
-
-Server::Server(int port) : port(port), serverSocket(0) {
+Server::Server(int port) : port(port), serverSocket(0),pooly(THREADS_NUM) {
     //Server::serverSocket = 0;
     cout << "Server connected" << endl;
 }
@@ -49,6 +49,7 @@ void Server::start() {
 
     TheThreads threads;
     threads.Socket = serverSocket;
+    threads.s = this;
     threads.clients.push_back(thread);
 
     int rc = pthread_create(&thread, NULL, connect, (void *) &threads);
@@ -74,29 +75,23 @@ void Server::start() {
 
             cout << "Waiting for clients connections..." << endl;
 
-            // Accept a new client connection
-
-
-            //pthread_mutex_t listen_mutex;
-            //pthread_mutex_lock(&listen_mutex);
-
-
-
 
             int player = accept(args->Socket, (struct sockaddr *)&clientAddress1, &clientAddressLen);
             cout << "Player connected" << endl;
             if (player == -1)
                 throw "Error on accept player";
-           // pthread_mutex_unlock(&listen_mutex);
 
-         //   HandleClient handle = HandleClient(player);
-            pthread_t thread;
+            args->s->getThreads().addTask(new Task(HandleClient::makeOrder, &player));
+
+
+            /* pthread_t thread;
             args->clients.push_back(thread);
+
             int rc = pthread_create(&thread, NULL, HandleClient::makeOrder, (void *) &player);
             if (rc) {
                 cout << "Error: unable to create thread, " << rc << endl;
                 exit(-1);
-            }
+            }*/
 // Close communication with the client
         }
 
@@ -129,12 +124,19 @@ void Server::exitSockets(TheThreads &threads) {
         }
     }
 
-    for (int j = 1; j < threads.clients.size(); ++j) {
+    /*for (int j = 1; j < threads.clients.size(); ++j) {
         pthread_cancel(threads.clients[j]);
-    }
+    }*/
+    pooly.terminate();
 
     cout << "SERVER IS CLOSED"<< endl;
 }
+
+ThreadPool Server::getThreads() {
+    return pooly;
+}
+
+
 
 
 /*(int clientSocket1, int clientSocket2)
