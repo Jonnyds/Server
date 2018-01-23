@@ -8,6 +8,6 @@ set(CMAKE_CXX_FLAGS -pthread)
 set(SOURCE_FILES main.cpp Server.cpp Server.h Command.h CommandsManager.cpp CommandsManager.h
         StartCommand.h StartCommand.cpp JoinCommand.h JoinCommand.cpp ListGamesCommand.h
         ListGamesCommand.cpp CloseCommand.h CloseCommand.cpp PlayCommand.h PlayCommand.cpp
-        GameManager.cpp GameManager.h HandleClient.cpp HandleClient.h GameList.cpp GameList.h ThreadPool.cpp ThreadPool.h)
+        GameManager.cpp GameManager.h HandleClient.cpp HandleClient.h GameList.cpp GameList.h ThreadPool.cpp ThreadPool.h Task.cpp Task.h)
 
 add_executable(main ${SOURCE_FILES})
