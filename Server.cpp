@@ -58,7 +58,7 @@ void Server::start() {
         exit(-1);
     }
 
-    exitSockets(threads);
+    exitSockets();
 }
 
 
@@ -98,7 +98,7 @@ void Server::start() {
 
     }
 
-void Server::exitSockets(TheThreads &threads) {
+void Server::exitSockets() {
 
     int n;
     string cmd;
@@ -123,11 +123,11 @@ void Server::exitSockets(TheThreads &threads) {
             close(gl->getList()[i].oSocket);
         }
     }
-
+    pooly.terminate();
     /*for (int j = 1; j < threads.clients.size(); ++j) {
         pthread_cancel(threads.clients[j]);
     }*/
-    pooly.terminate();
+
 
     cout << "SERVER IS CLOSED"<< endl;
 }

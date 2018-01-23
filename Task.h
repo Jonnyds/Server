@@ -7,8 +7,7 @@
 
 class Task {
 public:
-    Task(void * (*func)(void *arg), void* arg) :
-            func(func), arg(arg) {}
+    Task(void * (*func)(void *arg), void* arg) : func(func), arg(arg) {}
     void execute() {
         func(arg);
     }

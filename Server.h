@@ -15,11 +15,7 @@
 
 using  namespace std;
 
-struct TheThreads {
-    vector<pthread_t> clients;
-    int Socket;
-    Server *s;
-};
+
 
 class Server {
 
@@ -34,7 +30,7 @@ public:
      */
     void start();
 
-    void exitSockets(TheThreads &threads);
+    void exitSockets();
     ThreadPool getThreads();
 
 private:
@@ -47,6 +43,12 @@ private:
     int serverSocket; // the server's socket.
     pthread_t thread; // the connect function's thread.
     ThreadPool pooly;
+};
+
+struct TheThreads {
+    vector<pthread_t> clients;
+    int Socket;
+    Server *s;
 };
 
 #endif //SERVER_SERVER_H
