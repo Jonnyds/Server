@@ -4,6 +4,7 @@
 
 #include "ThreadPool.h"
 #include <unistd.h>
+
 ThreadPool::ThreadPool(int threadsNum) :
         stopped(false) {
     threads = new pthread_t[threadsNum];
@@ -13,13 +14,16 @@ ThreadPool::ThreadPool(int threadsNum) :
     }
     pthread_mutex_init(&lock, NULL);
 }
+
 void* ThreadPool::execute(void *arg) {
     ThreadPool *pool = (ThreadPool *)arg;
     pool->executeTasks();
 }
+
 void ThreadPool::addTask(Task *task) {
     tasksQueue.push(task);
 }
+
 void ThreadPool::executeTasks() {
     while (!stopped) {
         pthread_mutex_lock(&lock);
@@ -35,10 +39,12 @@ void ThreadPool::executeTasks() {
         }
     }
 }
+
 void ThreadPool::terminate() {
     pthread_mutex_destroy(&lock);
     stopped = true;
 }
+
 ThreadPool::~ThreadPool() {
     delete[] threads;
 }
