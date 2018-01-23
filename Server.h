@@ -31,7 +31,8 @@ public:
     void start();
 
     void exitSockets();
-    ThreadPool getThreads();
+    ThreadPool* getThreads();
+    int getserversocket();
 
 private:
     /**
@@ -42,11 +43,11 @@ private:
     int port; // the server's port.
     int serverSocket; // the server's socket.
     pthread_t thread; // the connect function's thread.
-    ThreadPool pooly;
+    ThreadPool *pooly;
 };
 
 struct TheThreads {
-    vector<pthread_t> clients;
+   // vector<pthread_t> clients;
     int Socket;
     Server *s;
 };

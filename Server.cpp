@@ -20,7 +20,8 @@ using namespace std;
 #define MAX_CONNECTED_CLIENTS 10
 #define THREADS_NUM 3
 
-Server::Server(int port) : port(port), serverSocket(0),pooly(THREADS_NUM) {
+Server::Server(int port) : port(port), serverSocket(0) {
+    pooly = new ThreadPool(THREADS_NUM);
     //Server::serverSocket = 0;
     cout << "Server connected" << endl;
 }
@@ -50,9 +51,9 @@ void Server::start() {
     TheThreads threads;
     threads.Socket = serverSocket;
     threads.s = this;
-    threads.clients.push_back(thread);
+  //  threads.clients.push_back(thread);
 
-    int rc = pthread_create(&thread, NULL, connect, (void *) &threads);
+    int rc = pthread_create(&thread, NULL, connect, (void *) this);
     if (rc) {
         cout << "Error: unable to create thread, " << rc << endl;
         exit(-1);
@@ -65,7 +66,7 @@ void Server::start() {
 
     // Handle requests from a specific client
  void* Server::connect(void* threads) {
-        struct TheThreads *args = (struct TheThreads *) threads;
+        Server *args = (Server *) threads;
 
         struct sockaddr_in clientAddress1;
         socklen_t clientAddressLen = sizeof((struct sockaddr *) &clientAddress1);
@@ -76,12 +77,13 @@ void Server::start() {
             cout << "Waiting for clients connections..." << endl;
 
 
-            int player = accept(args->Socket, (struct sockaddr *)&clientAddress1, &clientAddressLen);
+            int player = accept(args->getserversocket(), (struct sockaddr *)&clientAddress1, &clientAddressLen);
             cout << "Player connected" << endl;
             if (player == -1)
                 throw "Error on accept player";
 
-            args->s->getThreads().addTask(new Task(HandleClient::makeOrder, &player));
+            Task *t = new Task(HandleClient::makeOrder,&player);
+            args->getThreads()->addTask(t);
 
 
             /* pthread_t thread;
@@ -123,7 +125,7 @@ void Server::exitSockets() {
             close(gl->getList()[i].oSocket);
         }
     }
-    pooly.terminate();
+    pooly->terminate();
     /*for (int j = 1; j < threads.clients.size(); ++j) {
         pthread_cancel(threads.clients[j]);
     }*/
@@ -132,9 +134,14 @@ void Server::exitSockets() {
     cout << "SERVER IS CLOSED"<< endl;
 }
 
-ThreadPool Server::getThreads() {
+ThreadPool* Server::getThreads() {
     return pooly;
 }
+
+int Server::getserversocket() {
+    return serverSocket;
+}
+
 
 
 
