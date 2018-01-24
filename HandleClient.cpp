@@ -24,7 +24,7 @@ HandleClient::HandleClient(int &socket1) {
 void *HandleClient::makeOrder(void *socket) {
     string comSplit;
     string scmd;
-    char cmd[length];
+
     int s = *(int *) socket;
     CommandsManager command = CommandsManager();
 
@@ -37,19 +37,8 @@ void *HandleClient::makeOrder(void *socket) {
             break;
         }
 
-        int n = read(s, &cmd, sizeof(cmd));
 
-        if (n == -1) {
-            cout << "Error reading command" << endl;
-        }
-
-        if (n == 0) {
-            cout << "Player disconnected" << endl;
-        }
-
-        for (int i = 0; i < strlen(cmd); ++i) {
-            scmd.append(1u ,cmd[i]);
-        }
+        scmd = HandleClient::readcmd(s);
 
         string str(scmd);
         istringstream iss(str);
@@ -63,7 +52,28 @@ void *HandleClient::makeOrder(void *socket) {
         threadArgs.socket = *(int*)socket;
 
         command.executeCommand(threadArgs);
-        memset(cmd, 0, 50);
+
+
         scmd.clear();
+
     }
 }
+
+string HandleClient::readcmd(int sock) {
+    char cmd[length] = {0};
+    string stcmd = "";
+    int n = read(sock, &cmd, sizeof(cmd));
+    cout << cmd << endl;
+    if (n == -1) {
+        cout << "Error reading command" << endl;
+    }
+
+    if (n == 0) {
+        cout << "Player disconnected" << endl;
+    }
+    for (int i = 0; i < strlen(cmd); ++i) {
+        stcmd.append(1u ,cmd[i]);
+    }
+    return stcmd;
+}
+

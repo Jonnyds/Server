@@ -85,16 +85,6 @@ void Server::start() {
             Task *t = new Task(HandleClient::makeOrder,&player);
             args->getThreads()->addTask(t);
 
-
-            /* pthread_t thread;
-            args->clients.push_back(thread);
-
-            int rc = pthread_create(&thread, NULL, HandleClient::makeOrder, (void *) &player);
-            if (rc) {
-                cout << "Error: unable to create thread, " << rc << endl;
-                exit(-1);
-            }*/
-// Close communication with the client
         }
 
 
@@ -126,9 +116,6 @@ void Server::exitSockets() {
         }
     }
     pooly->terminate();
-    /*for (int j = 1; j < threads.clients.size(); ++j) {
-        pthread_cancel(threads.clients[j]);
-    }*/
 
 
     cout << "SERVER IS CLOSED"<< endl;
@@ -141,43 +128,3 @@ ThreadPool* Server::getThreads() {
 int Server::getserversocket() {
     return serverSocket;
 }
-
-
-
-
-
-/*(int clientSocket1, int clientSocket2)
-    int column, row ;
-
-    // Read new coordinates arguments from the first client
-        int n = read(clientSocket1, &row, sizeof (row));
-        if (n == -1) {
-            cout << "Error reading row coordinate" << endl;
-            return false;
-        }
-        if (n == 0) {
-            cout << "Player disconnected" << endl;
-            return false;
-        }
-
-        n = read(clientSocket1, &column, sizeof(column));
-        if (n == -1) {
-            cout << "Error reading column coordinate" << endl;
-            return false;
-        }
-
-    // Write the coordinates back to the second client
-        n = write(clientSocket2, &row, sizeof(row));
-        if (n == -1) {
-            cout << "Error writing to socket" << endl;
-            return false;
-        }
-        n = write(clientSocket2, &column, sizeof(column));
-        if (n == -1) {
-            cout << "Error writing to socket" << endl;
-            return false;
-        }
-        return true;
-
-}
- */

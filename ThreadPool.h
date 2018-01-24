@@ -18,35 +18,35 @@ using namespace std;
 class ThreadPool {
 public:
     /**
-     * construct a ThreadPool from a given integer
-     * @param threasNum the number of threads to create in the pool
+     * threadpool constructor
+     * @param threasNum the number of maximum threads running at a time
      */
     ThreadPool(int threasNum);
     /**
-     * add given Task to the list of tasks
+     * adds a task to the queue
      * @param task the Task to add
      */
     void addTask(Task *task);
     /**
-     * delete the mutex
+     * terminates the task execution and deletes the mutex
      */
     void terminate();
     /**
-     * release all the threads in the pool
+     * destructor
      */
     virtual ~ThreadPool();
 private:
-    queue <Task *> tasksQueue;
-    pthread_t* threads;
+    queue <Task *> tasksQueue; // the task queue
+    pthread_t* threads; // the threads to be made
     /**
-     * execute task if there is a free thread
+     * execute the tasks added to the queue
      */
     void executeTasks();
-    bool stopped;
+    bool stopped; // terminates the task execution
     pthread_mutex_t lock;
     /**
-     * call the static method execute
-     * @param arg the arguments for the thread
+     * executes a single task
+     * @param arg the arguments given to the thread
      */
     static void *execute(void *arg);
 };

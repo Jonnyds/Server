@@ -38,6 +38,12 @@ public:
      * @param socket - the client socket.
      */
     static void* makeOrder(void* socket);
+    /**
+    * Reads the commend from the socket
+    * @param sock the socket from which the commend is read
+    * @return a string with the commend read from the socket
+    */
+    static string readcmd(int sock);
 
 private:
      int socket; // the clients socket.

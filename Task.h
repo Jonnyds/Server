@@ -13,20 +13,20 @@
 class Task {
 public:
     /**
-     * construct a Task
-     * @param func the function that does task
-     * @param arg the arguments for the task
+     * a task constructor
+     * @param func the function to be called from the thread
+     * @param arg the arguments to be sent to the threads
      */
     Task(void * (*func)(void *arg), void* arg):
             func(func), arg(arg) {}
     /**
-     * execute the function of the task
+     * executes the call to the thread
      */
     void execute() {
         func(arg);
     }
     /**
-     * default destructor
+     * default task destructor
      */
     virtual ~Task(){}
 private:
