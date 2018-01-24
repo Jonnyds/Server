@@ -63,7 +63,6 @@ string HandleClient::readcmd(int sock) {
     char cmd[length] = {0};
     string stcmd = "";
     int n = read(sock, &cmd, sizeof(cmd));
-    cout << cmd << endl;
     if (n == -1) {
         cout << "Error reading command" << endl;
     }

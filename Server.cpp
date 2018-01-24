@@ -100,7 +100,6 @@ void Server::exitSockets() {
         cin >> cmd;
     }
 
-
     GameList* gl = GameList::getInstance();
 
     int closesocket = -4;
@@ -116,6 +115,10 @@ void Server::exitSockets() {
         }
     }
     pooly->terminate();
+
+    delete pooly;
+
+    exit(0);
 
 
     cout << "SERVER IS CLOSED"<< endl;
